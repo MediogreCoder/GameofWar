@@ -1,4 +1,3 @@
-//basic card class
 class Card {
   constructor(suit, rank, score) {
     this.suit = suit
@@ -6,6 +5,16 @@ class Card {
     this.score = score
   }    
 }
+
+class Player {
+  constructor(name) {
+    this.name = name
+    this.hand = []
+    this.currentCard = []
+    this.gameScore = 0
+  }
+}
+
 //suits,ranks and scores added to deck object for easier fucntion access
 class Deck {
   constructor(name) {
@@ -37,12 +46,15 @@ class Deck {
 }
   
 const MD = new Deck("MainDeck");
+const P1 = new Player("PlayerOne");
+const P2 = new Player("PlayerTwo");
 
-MD.generateDeck();
 
-console.log(MD)
+// MD.generateDeck();
 
-MD.shuffle();
+// console.log(MD)
 
-console.log(MD)
+// MD.shuffle();
+
+// console.log(MD)
  
