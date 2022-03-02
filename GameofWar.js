@@ -11,7 +11,7 @@ class Player {
     this.name = name
     this.hand = []
     this.currentCard = []
-    this.gameScore = 0
+    this.handSize = 0
   }
 }
 
@@ -24,6 +24,8 @@ class Deck {
     this.suits = ["Spades", "Hearts", "Clubs", "Diamonds"];
     this.ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
     this.scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    this.tempDealOne = []
+    this.tempDealTwo = []
   }
   //iterates through suits and ranks to generate cards to be pushed into deck.cards[]
   generateDeck() { 
@@ -35,12 +37,24 @@ class Deck {
     }
   }
   shuffle() {
-    let shuffledCardsLength = this.cards.length;  
-    for (let i=0; i< shuffledCardsLength; i++) {
+    let shuffledCardsLength = this.cards.length;
+    for (let i = 0; i < shuffledCardsLength; i++) {
       let j = Math.floor(Math.random() * shuffledCardsLength);
       let placeholderDeck = this.cards[i];
       this.cards[i] = this.cards[j];
-      this.cards[j] = placeholderDeck; 
+      this.cards[j] = placeholderDeck;
+    }
+  }
+  deal() {
+    for (let i = 0; i < this.cards.length; i+=2) {
+      this.tempDealOne[i] = this.cards[i];
+      P1.hand[i] = this.tempDealOne[i];
+      P1.handSize+=1;
+    }
+    for (let i = 1; i < this.cards.length; i+=2) {
+      this.tempDealTwo[i] = this.cards[i];
+      P2.hand[i] = this.tempDealTwo[i];
+      P2.handSize+=1;
     }
   }
 }
@@ -49,12 +63,13 @@ const MD = new Deck("MainDeck");
 const P1 = new Player("PlayerOne");
 const P2 = new Player("PlayerTwo");
 
+MD.generateDeck();
 
-// MD.generateDeck();
+MD.shuffle();
 
-// console.log(MD)
+MD.deal()
 
-// MD.shuffle();
-
-// console.log(MD)
- 
+console.log(P1.hand)
+console.log(P2.hand)
+console.log(P1.handSize)
+console.log(P2.handSize)
