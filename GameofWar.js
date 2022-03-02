@@ -25,5 +25,24 @@ class Deck {
       }
     }
   }
+  shuffle() {
+    let shuffledCardsLength = this.cards.length;  
+    for (let i=0; i< shuffledCardsLength; i++) {
+      let j = Math.floor(Math.random() * shuffledCardsLength);
+      let placeholderDeck = this.cards[i];
+      this.cards[i] = this.cards[j];
+      this.cards[j] = placeholderDeck; 
+    }
+  }
 }
   
+const MD = new Deck("MainDeck");
+
+MD.generateDeck();
+
+console.log(MD)
+
+MD.shuffle();
+
+console.log(MD)
+ 
