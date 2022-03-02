@@ -1,4 +1,4 @@
-// created basic card class
+//basic card class
 class Card {
   constructor(suit, rank, score) {
     this.suit = suit
@@ -6,8 +6,7 @@ class Card {
     this.score = score
   }    
 }
-
-//create basic deck class
+//suits,ranks and scores added to deck object for easier fucntion access
 class Deck {
   constructor(name) {
     this.name = name
@@ -16,6 +15,15 @@ class Deck {
     this.suits = ["Spades", "Hearts", "Clubs", "Diamonds"];
     this.ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
     this.scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-
   }
+  //iterates through suits and ranks to generate cards to be pushed into deck.cards[]
+  generateDeck() { 
+    for (let i = 0; i < this.suits.length; i++) {
+      for (let x = 0; x < this.ranks.length; x++) {
+        let genCard = new Card(this.suits[i], this.ranks[x], this.scores[x]);
+        this.cards.push(genCard)
+      }
+    }
   }
+}
+  
