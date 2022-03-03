@@ -1,6 +1,7 @@
 class Card {
-  constructor(suit, rank, score) {
+  constructor(suit, suitsScore, rank, score) {
     this.suit = suit
+    this.suitsScore = suitsScore
     this.rank = rank
     this.score = score
   }    
@@ -29,6 +30,7 @@ class Deck {
     this.deckLength = 52
     this.cards = []
     this.suits = ["Spades", "Hearts", "Clubs", "Diamonds"];
+    this.suitsScores = [1, 2, 3, 4]
     this.ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
     this.scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     this.tempDealOne = []
@@ -38,7 +40,7 @@ class Deck {
   generateDeck() {
     for (let i = 0; i < this.suits.length; i++) {
       for (let x = 0; x < this.ranks.length; x++) {
-        let genCard = new Card(this.suits[i], this.ranks[x], this.scores[x]);
+        let genCard = new Card(this.suits[i], this.suitsScores[i], this.ranks[x], this.scores[x]);
         this.cards.push(genCard)
       }
     }
@@ -56,11 +58,12 @@ class Deck {
     for (let i = 0; i < this.cards.length; i += 2) {
       this.tempDealOne.push(this.cards[i]);
       P1.hand.push(this.tempDealOne);
-      for (let i = 1; i < this.cards.length; i += 2) {
+    }
+    for (let i = 1; i < this.cards.length; i += 2) {
         this.tempDealTwo.push(this.cards[i]);
         P2.hand.push(this.tempDealTwo);
       }
-    }
+    
   }
   // while the index is less than the kength of the array of the players hands, this function will continue to pop the array into the 
   // this function will continue to pop the array into the current card array to represent the card that is being played
@@ -83,10 +86,12 @@ class Deck {
           console.log("PlayerOne Wins!");
           P1.hand.splice(0, 0, TB.p2CurrentCard.splice(0, 1)[0]);
         }
+        
         else if (TB.p1CurrentCard[0].score < TB.p2CurrentCard[0].score) {
           console.log("PlayerTwo Wins!");
           P2.hand.splice(0, 0, TB.p1CurrentCard.splice(0, 1)[0]);
         }
+          
        
       }
       }
@@ -110,6 +115,9 @@ MD.deal()
 MD.play()
 
 console.log(P1.hand)
+console.log(P2.hand)
 console.log(P1.hand.length)
-// console.log(P2.hand)
-// console.log(P2.hand.length)
+console.log(P2.hand.length)
+
+
+
