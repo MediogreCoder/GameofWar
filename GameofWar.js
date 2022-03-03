@@ -11,7 +11,6 @@ class Player {
     this.name = name
     this.hand = []
     this.currentCard = []
-    this.handSize = 0
   }
 }
 
@@ -27,8 +26,8 @@ class Deck {
     this.tempDealOne = []
     this.tempDealTwo = []
   }
-  //iterates through suits and ranks to generate cards to be pushed into deck.cards[]
-  generateDeck() { 
+  
+  generateDeck() {
     for (let i = 0; i < this.suits.length; i++) {
       for (let x = 0; x < this.ranks.length; x++) {
         let genCard = new Card(this.suits[i], this.ranks[x], this.scores[x]);
@@ -46,19 +45,26 @@ class Deck {
     }
   }
   deal() {
-    for (let i = 0; i < this.cards.length; i+=2) {
-      this.tempDealOne[i] = this.cards[i];
-      P1.hand[i] = this.tempDealOne[i];
-      P1.handSize+=1;
-    }
-    for (let i = 1; i < this.cards.length; i+=2) {
-      this.tempDealTwo[i] = this.cards[i];
-      P2.hand[i] = this.tempDealTwo[i];
-      P2.handSize+=1;
+    for (let i = 0; i < this.cards.length; i += 2) {
+      this.tempDealOne.push(this.cards[i]);
+      P1.hand.push(this.tempDealOne);
+      for (let i = 1; i < this.cards.length; i += 2) {
+        this.tempDealTwo.push(this.cards[i]);
+        P2.hand.push(this.tempDealTwo);
+      }
     }
   }
-}
-  
+  // while the index is less than the kength of the array of the players hands, this function will continue to pop the array into the 
+  // this function will continue to pop the array into the current card array to represent the card that is being played
+  // play() {
+  //   let x = P1.hand.length;
+  //   let y = P2.hand.length;
+  //   while (i < x) {
+  //     P1.hand.pop().push(P1.currentCard);
+  //   }
+  //   }
+  // }
+
 const MD = new Deck("MainDeck");
 const P1 = new Player("PlayerOne");
 const P2 = new Player("PlayerTwo");
@@ -69,7 +75,9 @@ MD.shuffle();
 
 MD.deal()
 
+MD.play()
+
 console.log(P1.hand)
-console.log(P2.hand)
-console.log(P1.handSize)
-console.log(P2.handSize)
+console.log(P1.currentCard)
+  
+  
