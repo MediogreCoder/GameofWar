@@ -10,7 +10,15 @@ class Player {
   constructor(name) {
     this.name = name
     this.hand = []
-    this.currentCard = []
+    
+  }
+}
+// table class to hold the cards being played and nest the game rules
+class Table {
+  constructor(name) {
+    this.name = name
+    this.p1CurrentCard = []
+    this.p2CurrentCard = []
   }
 }
 
@@ -56,18 +64,32 @@ class Deck {
   }
   // while the index is less than the kength of the array of the players hands, this function will continue to pop the array into the 
   // this function will continue to pop the array into the current card array to represent the card that is being played
-  // play() {
-  //   let x = P1.hand.length;
-  //   let y = P2.hand.length;
-  //   while (i < x) {
-  //     P1.hand.pop().push(P1.currentCard);
-  //   }
-  //   }
-  // }
+//   play() {
+//     for (let i = 0; i < (this.P1.hand.length); i++) {
+//       P1.hand.pop().push(P1.currentCard);
+//     }
+//   }
+  
+//play function part 2: pushed current card into tables current card element but need to figure out how to target score
+  
+  play() {
+    for (let i = 0; i < 1; i++) {
+      TB.p1CurrentCard.push(P1.hand[i][i]);
+      TB.p2CurrentCard.push(P2.hand[i][i]); {
+        if (p1CurrentCard.Card[2] > p2CurrentCard.Card[2]) {
+          console.log("it works!")
+        }
+      }
+    }
+  }
+}
+
+  
 
 const MD = new Deck("MainDeck");
 const P1 = new Player("PlayerOne");
 const P2 = new Player("PlayerTwo");
+const TB = new Table("Tabletop")
 
 MD.generateDeck();
 
@@ -77,7 +99,6 @@ MD.deal()
 
 MD.play()
 
-console.log(P1.hand)
-console.log(P1.currentCard)
+console.log(TB)
   
   
