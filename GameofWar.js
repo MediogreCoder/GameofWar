@@ -1,7 +1,6 @@
 class Card {
   constructor(suit, suitsScore, rank, score) {
     this.suit = suit
-    this.suitsScore = suitsScore
     this.rank = rank
     this.score = score
   }    
@@ -30,7 +29,6 @@ class Deck {
     this.deckLength = 52
     this.cards = []
     this.suits = ["Spades", "Hearts", "Clubs", "Diamonds"];
-    this.suitsScores = [1, 2, 3, 4]
     this.ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
     this.scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   }
@@ -38,7 +36,7 @@ class Deck {
   generateDeck() {
     for (let i = 0; i < this.suits.length; i++) {
       for (let x = 0; x < this.ranks.length; x++) {
-        let genCard = new Card(this.suits[i], this.suitsScores[i], this.ranks[x], this.scores[x]);
+        let genCard = new Card(this.suits[i], this.ranks[x], this.scores[x]);
         this.cards.push(genCard)
       }
     }
@@ -89,26 +87,36 @@ class Deck {
   //   }
   // }
 
- //might not need for let iterator, will try only while
+ //need to work on tie logic
   play() {
-    while (P1.hand.length || P2.hand.length < 0) {
+    while (P1.hand.length !== 0 && P2.hand.length !== 0) {
       for (let i = 0; i <= P1.hand.length; i++) {
-        TB.p1CurrentCard.splice(0, 0, P1.hand.splice(0, 1)[0]);
-        TB.p2CurrentCard.splice(0, 0, P2.hand.splice(0, 1)[0]);
+        TB.p1CurrentCard.splice(0, 0, P1.hand.splice(0, 1));
+        TB.p2CurrentCard.splice(0, 0, P2.hand.splice(0, 1));
         {
           if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
-            P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1)[0]);
-            P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1)[0]);
+            P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1));
+            P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1));
+            console.log()
           }
           else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
-            P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1)[0]);
-            P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1)[0]);
-
+            P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1));
+            P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1));
           }
-          
+          else if ((TB.p1CurrentCard[0].score) == (TB.p2CurrentCard[0].score)) {
+            TB.p1CurrentCard.splice(0, 0, P1.hand.splice([i], 4));
+            TB.p2CurrentCard.splice(0, 0, P2.hand.splice([i], 4));{
+            for (let x = P1.hand[i+1]; x < (P1.hand[i] + 4); x++) {
+              if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[1].score)) {
+                P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 4));
+                P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 4));
+                console.log("P1 wins War!")
+              }
+              }
+            }
+          }
         }
-      }
-       
+      }   
     }
   }
 
