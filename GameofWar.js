@@ -78,10 +78,17 @@ class Deck {
       TB.p1CurrentCard.push(P1.hand[i][i]);
       TB.p2CurrentCard.push(P2.hand[i][i]);
       {
+        {
         if (TB.p1CurrentCard[0].score > TB.p2CurrentCard[0].score) {
           console.log("PlayerOne Wins!");
-          // P1.hand = TB.p2CurrentCard.splice(0, 1);
+          P1.hand.splice(0, 0, TB.p2CurrentCard.splice(0, 1)[0]);
         }
+        else if (TB.p1CurrentCard[0].score < TB.p2CurrentCard[0].score) {
+          console.log("PlayerTwo Wins!");
+          P2.hand.splice(0, 0, TB.p1CurrentCard.splice(0, 1)[0]);
+        }
+       
+      }
       }
     }
   }
@@ -104,3 +111,5 @@ MD.play()
 
 console.log(P1.hand)
 console.log(P1.hand.length)
+// console.log(P2.hand)
+// console.log(P2.hand.length)
