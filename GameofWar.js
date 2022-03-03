@@ -59,93 +59,6 @@ class Deck {
     }
     
   }
-
-  
-  //play function part 2: pushed current card into tables current card element but need to figure out how to target score
-  // splice may be the way to shove card back to winners deck
-  
-  // play() {
-  //   for (let i = 0; i < 1; i++) {
-  //     TB.p1CurrentCard.push(P1.hand[i][i]);
-  //     TB.p2CurrentCard.push(P2.hand[i][i]);
-  //     {
-  //       {
-  //         if (TB.p1CurrentCard.score > TB.p2CurrentCard.score) {
-  //           console.log("PlayerOne Wins!");
-  //           P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1)[0]);
-  //           P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1)[0]);
-  //         }
-        
-  //         else if (TB.p1CurrentCard.score < TB.p2CurrentCard.score) {
-  //           console.log("PlayerTwo Wins!");
-  //           P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1)[0]);
-  //           P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1)[0]);
-  //         }
-          
-  //     }
-  //     }
-  //   }
-  // }
-
-  //need to work on tie logic
-  // play() {
-  //   while (P1.hand.length !== 0 && P2.hand.length !== 0) {
-  //     for (let i = 0; i <= P1.hand.length; i++) {
-  //       TB.p1CurrentCard.splice(0, 0, P1.hand.splice(0, 1));
-  //       TB.p2CurrentCard.splice(0, 0, P2.hand.splice(0, 1));
-  //       {
-  //         if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
-  //           P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1));
-  //           P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1));
-  //         }
-  //         else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
-  //           P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1));
-  //           P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1));
-  //         }
-  //         else if ((TB.p1CurrentCard[0].score) == (TB.p2CurrentCard[0].score)) {
-  //           TB.p1CurrentCard.splice(0, 0, P1.hand.splice([i], 4));
-  //           TB.p2CurrentCard.splice(0, 0, P2.hand.splice([i], 4));{
-  //           for (let x = P1.hand[i+1]; x < (P1.hand[i] + 4); x++) {
-  //             if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
-  //               P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 4));
-  //               P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 4));
-  //               console.log("P1 wins War!")
-  //             }
-  //             else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
-  //               P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 4));
-  //               P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 4));
-  //               console.log("P2 wins War!")
-  //             }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-  
-  // split play fucntion into 2
-  // playCard() {
-  //   TB.p1CurrentCard.splice(0, 0, P1.hand.splice((P1.hand.length - 1), 1));
-  //   TB.p2CurrentCard.splice(0, 0, P2.hand.splice((P1.hand.length - 1), 1));
-  // }
-  
-  // checkCards() {
-  //   // while (P1.hand.length !== 0 && P2.hand.length !== 0)
-  //   // {
-  //     if ((TB.p1CurrentCard[0][0].score) > (TB.p2CurrentCard[0][0].score)) {
-  //       P1.hand.splice(0, 0, TB.p2CurrentCard.splice(0, 1));
-  //       P1.hand.splice(0, 0, TB.p1CurrentCard.splice(0, 1));
-  //       this.playCard();
-
-  //     }
-  //     else if ((TB.p1CurrentCard[0][0].score) < (TB.p2CurrentCard[0][0].score)) {
-  //       P2.hand.splice(0, 0, TB.p2CurrentCard.splice(0, 1));
-  //       P2.hand.splice(0, 0, TB.p1CurrentCard.splice(0, 1));
-  //       this.playCard();
-  //     }
-  //   }
-    // }
   
   // redo play functions with pop/unshift
   playCard() {
@@ -164,7 +77,7 @@ class Deck {
           P2.hand.unshift(TB.p1CurrentCard.pop());
           P2.hand.unshift(TB.p2CurrentCard.pop());
         }
-        else if ((TB.p1CurrentCard[0].score) == (TB.p2CurrentCard[0].score)) {
+        else if ((TB.p1CurrentCard[0].score) === (TB.p2CurrentCard[0].score)) {
           P1.hand.unshift(TB.p2CurrentCard.pop());
           P1.hand.unshift(TB.p1CurrentCard.pop());
           console.log("Its a tie!");
@@ -173,12 +86,28 @@ class Deck {
       this.playCard();
     }
   }
-  }
-  
 
 
-  
-
+  // checkCards() {
+  //   while (P1.hand.length > 0 && P2.hand.length > 0) {
+  //     {
+  //       if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
+  //         P1.hand.unshift(TB.p2CurrentCard.pop());
+  //         P1.hand.unshift(TB.p1CurrentCard.pop());
+  //       }
+  //       else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
+  //         P2.hand.unshift(TB.p1CurrentCard.pop());
+  //         P2.hand.unshift(TB.p2CurrentCard.pop());
+  //       }
+  //       else if ((TB.p1CurrentCard[0].score) == (TB.p2CurrentCard[0].score)) {
+  //         this.WAR();
+  //         console.log("WAR WHAT IS IT GOOD FOR");
+  //       }
+  //     }
+  //     this.playCard();
+  //   }
+  // }
+}
   
 
 const MD = new Deck("MainDeck");
