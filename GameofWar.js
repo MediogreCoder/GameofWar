@@ -1,5 +1,5 @@
 class Card {
-  constructor(suit, suitsScore, rank, score) {
+  constructor(suit, rank, score) {
     this.suit = suit
     this.rank = rank
     this.score = score
@@ -87,45 +87,71 @@ class Deck {
   //   }
   // }
 
- //need to work on tie logic
-  play() {
-    while (P1.hand.length !== 0 && P2.hand.length !== 0) {
-      for (let i = 0; i <= P1.hand.length; i++) {
-        TB.p1CurrentCard.splice(0, 0, P1.hand.splice(0, 1));
-        TB.p2CurrentCard.splice(0, 0, P2.hand.splice(0, 1));
-        {
-          if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
-            P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1));
-            P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1));
-            console.log()
-          }
-          else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
-            P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1));
-            P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1));
-          }
-          else if ((TB.p1CurrentCard[0].score) == (TB.p2CurrentCard[0].score)) {
-            TB.p1CurrentCard.splice(0, 0, P1.hand.splice([i], 4));
-            TB.p2CurrentCard.splice(0, 0, P2.hand.splice([i], 4));{
-            for (let x = P1.hand[i+1]; x < (P1.hand[i] + 4); x++) {
-              if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[1].score)) {
-                P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 4));
-                P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 4));
-                console.log("P1 wins War!")
-              }
-              }
-            }
-          }
-        }
-      }   
-    }
-  }
-
+  //need to work on tie logic
   // play() {
-  //   while (P1.hand.length || P2.hand.lenth) {
-  //     if (P1.hand[P1.hand.length - 1].score)
+  //   while (P1.hand.length !== 0 && P2.hand.length !== 0) {
+  //     for (let i = 0; i <= P1.hand.length; i++) {
+  //       TB.p1CurrentCard.splice(0, 0, P1.hand.splice(0, 1));
+  //       TB.p2CurrentCard.splice(0, 0, P2.hand.splice(0, 1));
+  //       {
+  //         if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
+  //           P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1));
+  //           P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1));
+  //         }
+  //         else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
+  //           P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1));
+  //           P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1));
+  //         }
+  //         else if ((TB.p1CurrentCard[0].score) == (TB.p2CurrentCard[0].score)) {
+  //           TB.p1CurrentCard.splice(0, 0, P1.hand.splice([i], 4));
+  //           TB.p2CurrentCard.splice(0, 0, P2.hand.splice([i], 4));{
+  //           for (let x = P1.hand[i+1]; x < (P1.hand[i] + 4); x++) {
+  //             if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
+  //               P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 4));
+  //               P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 4));
+  //               console.log("P1 wins War!")
+  //             }
+  //             else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
+  //               P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 4));
+  //               P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 4));
+  //               console.log("P2 wins War!")
+  //             }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
   //   }
   // }
-}
+  
+  // split play fucntion into 2
+  // playCard() {
+  //   TB.p1CurrentCard.splice(0, 0, P1.hand.splice((P1.hand.length - 1), 1));
+  //   TB.p2CurrentCard.splice(0, 0, P2.hand.splice((P1.hand.length - 1), 1));
+  // }
+  
+  // checkCards() {
+  //   // while (P1.hand.length !== 0 && P2.hand.length !== 0)
+  //   // {
+  //     if ((TB.p1CurrentCard[0][0].score) > (TB.p2CurrentCard[0][0].score)) {
+  //       P1.hand.splice(0, 0, TB.p2CurrentCard.splice(0, 1));
+  //       P1.hand.splice(0, 0, TB.p1CurrentCard.splice(0, 1));
+  //       this.playCard();
+
+  //     }
+  //     else if ((TB.p1CurrentCard[0][0].score) < (TB.p2CurrentCard[0][0].score)) {
+  //       P2.hand.splice(0, 0, TB.p2CurrentCard.splice(0, 1));
+  //       P2.hand.splice(0, 0, TB.p1CurrentCard.splice(0, 1));
+  //       this.playCard();
+  //     }
+  //   }
+    // }
+  
+  // redo play functions with pop/shift
+  }
+
+
+  
 
   
 
@@ -143,10 +169,12 @@ MD.deal()
 // console.log(P1.hand)
 // console.log(P2.hand)
 
-MD.play()
+MD.playCard()
+MD.checkCards()
 
-// console.log(TB.p1CurrentCard)
-// console.log(TB.p2CurrentCard)
+
+console.log(TB.p1CurrentCard)
+console.log(TB.p2CurrentCard)
 console.log(TB.p1CurrentCard.length)
 console.log(TB.p2CurrentCard.length)
 console.log(P1.hand.length)
