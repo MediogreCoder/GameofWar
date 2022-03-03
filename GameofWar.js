@@ -33,8 +33,6 @@ class Deck {
     this.suitsScores = [1, 2, 3, 4]
     this.ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
     this.scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    this.tempDealOne = []
-    this.tempDealTwo = []
   }
   
   generateDeck() {
@@ -56,47 +54,69 @@ class Deck {
   }
   deal() {
     for (let i = 0; i < this.cards.length; i += 2) {
-      this.tempDealOne.push(this.cards[i]);
-      P1.hand.push(this.tempDealOne);
+      P1.hand.push(this.cards[i]);
     }
     for (let i = 1; i < this.cards.length; i += 2) {
-        this.tempDealTwo.push(this.cards[i]);
-        P2.hand.push(this.tempDealTwo);
-      }
+      P2.hand.push(this.cards[i]);
+    }
     
   }
-  // while the index is less than the kength of the array of the players hands, this function will continue to pop the array into the 
-  // this function will continue to pop the array into the current card array to represent the card that is being played
-//   play() {
-//     for (let i = 0; i < (this.P1.hand.length); i++) {
-//       P1.hand.pop().push(P1.currentCard);
-//     }
-//   }
+
   
-//play function part 2: pushed current card into tables current card element but need to figure out how to target score
-// splice may be the way to shove card back to winners deck
+  //play function part 2: pushed current card into tables current card element but need to figure out how to target score
+  // splice may be the way to shove card back to winners deck
   
-  play() {
-    for (let i = 0; i < 1; i++) {
-      TB.p1CurrentCard.push(P1.hand[i][i]);
-      TB.p2CurrentCard.push(P2.hand[i][i]);
-      {
-        {
-        if (TB.p1CurrentCard[0].score > TB.p2CurrentCard[0].score) {
-          console.log("PlayerOne Wins!");
-          P1.hand.splice(0, 0, TB.p2CurrentCard.splice(0, 1)[0]);
-        }
+  // play() {
+  //   for (let i = 0; i < 1; i++) {
+  //     TB.p1CurrentCard.push(P1.hand[i][i]);
+  //     TB.p2CurrentCard.push(P2.hand[i][i]);
+  //     {
+  //       {
+  //         if (TB.p1CurrentCard.score > TB.p2CurrentCard.score) {
+  //           console.log("PlayerOne Wins!");
+  //           P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1)[0]);
+  //           P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1)[0]);
+  //         }
         
-        else if (TB.p1CurrentCard[0].score < TB.p2CurrentCard[0].score) {
-          console.log("PlayerTwo Wins!");
-          P2.hand.splice(0, 0, TB.p1CurrentCard.splice(0, 1)[0]);
-        }
+  //         else if (TB.p1CurrentCard.score < TB.p2CurrentCard.score) {
+  //           console.log("PlayerTwo Wins!");
+  //           P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1)[0]);
+  //           P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1)[0]);
+  //         }
           
+  //     }
+  //     }
+  //   }
+  // }
+
+ //might not need for let iterator, will try only while
+  play() {
+    while (P1.hand.length || P2.hand.length < 0) {
+      for (let i = 0; i <= P1.hand.length; i++) {
+        TB.p1CurrentCard.splice(0, 0, P1.hand.splice(0, 1)[0]);
+        TB.p2CurrentCard.splice(0, 0, P2.hand.splice(0, 1)[0]);
+        {
+          if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
+            P1.hand.splice(P1.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1)[0]);
+            P1.hand.splice(P1.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1)[0]);
+          }
+          else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
+            P2.hand.splice(P2.hand.length - 1, 0, TB.p1CurrentCard.splice(0, 1)[0]);
+            P2.hand.splice(P2.hand.length - 1, 0, TB.p2CurrentCard.splice(0, 1)[0]);
+
+          }
+          
+        }
+      }
        
-      }
-      }
     }
   }
+
+  // play() {
+  //   while (P1.hand.length || P2.hand.lenth) {
+  //     if (P1.hand[P1.hand.length - 1].score)
+  //   }
+  // }
 }
 
   
@@ -112,12 +132,20 @@ MD.shuffle();
 
 MD.deal()
 
+// console.log(P1.hand)
+// console.log(P2.hand)
+
 MD.play()
 
-console.log(P1.hand)
-console.log(P2.hand)
+// console.log(TB.p1CurrentCard)
+// console.log(TB.p2CurrentCard)
+console.log(TB.p1CurrentCard.length)
+console.log(TB.p2CurrentCard.length)
 console.log(P1.hand.length)
 console.log(P2.hand.length)
+
+
+
 
 
 
