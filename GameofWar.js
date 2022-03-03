@@ -147,8 +147,34 @@ class Deck {
   //   }
     // }
   
-  // redo play functions with pop/shift
+  // redo play functions with pop/unshift
+  playCard() {
+    TB.p1CurrentCard.unshift(P1.hand.pop());
+    TB.p2CurrentCard.unshift(P2.hand.pop());
   }
+
+  checkCards() {
+    while (P1.hand.length > 0 && P2.hand.length > 0) {
+      {
+        if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
+          P1.hand.unshift(TB.p2CurrentCard.pop());
+          P1.hand.unshift(TB.p1CurrentCard.pop());
+        }
+        else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
+          P2.hand.unshift(TB.p1CurrentCard.pop());
+          P2.hand.unshift(TB.p2CurrentCard.pop());
+        }
+        else if ((TB.p1CurrentCard[0].score) == (TB.p2CurrentCard[0].score)) {
+          P1.hand.unshift(TB.p2CurrentCard.pop());
+          P1.hand.unshift(TB.p1CurrentCard.pop());
+          console.log("Its a tie!");
+        }
+      }
+      this.playCard();
+    }
+  }
+  }
+  
 
 
   
@@ -173,12 +199,17 @@ MD.playCard()
 MD.checkCards()
 
 
-console.log(TB.p1CurrentCard)
-console.log(TB.p2CurrentCard)
+// console.log(TB.p1CurrentCard)
+// console.log(TB.p2CurrentCard)
+// console.log(TB.p1CurrentCard.length)
+// console.log(TB.p2CurrentCard.length)
+
 console.log(TB.p1CurrentCard.length)
 console.log(TB.p2CurrentCard.length)
 console.log(P1.hand.length)
 console.log(P2.hand.length)
+// console.log(TB.p1CurrentCard.length)
+// console.log(TB.p2CurrentCard.length)
 
 
 
