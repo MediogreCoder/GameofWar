@@ -71,13 +71,16 @@ class Deck {
 //   }
   
 //play function part 2: pushed current card into tables current card element but need to figure out how to target score
+// splice may be the way to shove card back to winners deck
   
   play() {
     for (let i = 0; i < 1; i++) {
       TB.p1CurrentCard.push(P1.hand[i][i]);
-      TB.p2CurrentCard.push(P2.hand[i][i]); {
-        if (p1CurrentCard.Card[2] > p2CurrentCard.Card[2]) {
-          console.log("it works!")
+      TB.p2CurrentCard.push(P2.hand[i][i]);
+      {
+        if (TB.p1CurrentCard[0].score > TB.p2CurrentCard[0].score) {
+          console.log("PlayerOne Wins!");
+          // P1.hand = TB.p2CurrentCard.splice(0, 1);
         }
       }
     }
@@ -99,6 +102,5 @@ MD.deal()
 
 MD.play()
 
-console.log(TB)
-  
-  
+console.log(P1.hand)
+console.log(P1.hand.length)
