@@ -19,6 +19,8 @@ class Table {
     this.name = name
     this.p1CurrentCard = []
     this.p2CurrentCard = []
+    this.p1warCards = []
+    this.p2warCards = []
   }
 }
 
@@ -31,6 +33,8 @@ class Deck {
     this.suits = ["Spades", "Hearts", "Clubs", "Diamonds"];
     this.ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
     this.scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    this.P1Score = 0
+    this.P2Score = 0
   }
   
   generateDeck() {
@@ -67,46 +71,39 @@ class Deck {
   }
 
   checkCards() {
-    while (P1.hand.length > 0 && P2.hand.length > 0) {
-      {
-        if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
-          P1.hand.unshift(TB.p2CurrentCard.pop());
-          P1.hand.unshift(TB.p1CurrentCard.pop());
-        }
-        else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
-          P2.hand.unshift(TB.p1CurrentCard.pop());
-          P2.hand.unshift(TB.p2CurrentCard.pop());
-        }
-        else if ((TB.p1CurrentCard[0].score) === (TB.p2CurrentCard[0].score)) {
-          P1.hand.unshift(TB.p2CurrentCard.pop());
-          P1.hand.unshift(TB.p1CurrentCard.pop());
-          console.log("Its a tie!");
-        }
+    
+    if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
+      this.P1Score ++
+      console.log("PlayerOne wins with their current score of " + this.P1Score);
+        P1.hand.unshift(TB.p2CurrentCard.pop());
+        P1.hand.unshift(TB.p1CurrentCard.pop());
+      
       }
-      this.playCard();
-    }
+    else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
+      this.P2Score ++  
+      console.log("PlayerTwo wins with their current score of " + this.P2Score);
+        P2.hand.unshift(TB.p1CurrentCard.pop());
+        P2.hand.unshift(TB.p2CurrentCard.pop());
+       
+      }
+      else if ((TB.p1CurrentCard[0].score) === (TB.p2CurrentCard[0].score)) {
+        P2.hand.unshift(TB.p2CurrentCard.pop());
+        P1.hand.unshift(TB.p1CurrentCard.pop());
+        console.log("Its a tie!");
+      }
   }
 
-
-  // checkCards() {
-  //   while (P1.hand.length > 0 && P2.hand.length > 0) {
-  //     {
-  //       if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
-  //         P1.hand.unshift(TB.p2CurrentCard.pop());
-  //         P1.hand.unshift(TB.p1CurrentCard.pop());
-  //       }
-  //       else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
-  //         P2.hand.unshift(TB.p1CurrentCard.pop());
-  //         P2.hand.unshift(TB.p2CurrentCard.pop());
-  //       }
-  //       else if ((TB.p1CurrentCard[0].score) == (TB.p2CurrentCard[0].score)) {
-  //         this.WAR();
-  //         console.log("WAR WHAT IS IT GOOD FOR");
-  //       }
-  //     }
-  //     this.playCard();
-  //   }
-  // }
+  
+  keepPlayingOrNot() {
+    while (P1.hand.length > 0 && P2.hand.length > 0) {
+      this.playCard();
+      this.checkCards();
+    }
+  }
+  printScore() {
+    let Round = this.P1Score + this.P2Score
+    console.log("its finally over after round #" + Round)
+  }
 }
   
 
@@ -126,6 +123,8 @@ MD.deal()
 
 MD.playCard()
 MD.checkCards()
+MD.keepPlayingOrNot()
+MD.printScore()
 
 
 // console.log(TB.p1CurrentCard)
