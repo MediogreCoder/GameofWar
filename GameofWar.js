@@ -30,66 +30,77 @@ class Table {
     TB.p2CurrentCard.unshift(P2.hand.pop());
   }
 
-  // checkCards() {
-    
-  //   if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
-  //     this.P1Score ++
-  //     console.log("PlayerOne wins with their current score of " + this.P1Score);
-  //       P1.hand.unshift(TB.p2CurrentCard.pop());
-  //       P1.hand.unshift(TB.p1CurrentCard.pop());
+  checkCards() {
+    if ((TB.p1CurrentCard[0].score) > (TB.p2CurrentCard[0].score)) {
+      this.P1Score ++
+      console.log("PlayerOne wins with their current score of " + this.P1Score);
+        P1.hand.unshift(TB.p2CurrentCard.pop());
+        P1.hand.unshift(TB.p1CurrentCard.pop());
       
-  //     }
-  //   else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
-  //     this.P2Score ++  
-  //     console.log("PlayerTwo wins with their current score of " + this.P2Score);
-  //       P2.hand.unshift(TB.p1CurrentCard.pop());
-  //       P2.hand.unshift(TB.p2CurrentCard.pop());
+      }
+    else if ((TB.p1CurrentCard[0].score) < (TB.p2CurrentCard[0].score)) {
+      this.P2Score ++  
+      console.log("PlayerTwo wins with their current score of " + this.P2Score);
+        P2.hand.unshift(TB.p1CurrentCard.pop());
+        P2.hand.unshift(TB.p2CurrentCard.pop());
        
-  //     }
-      // else if ((TB.p1CurrentCard[0].score) === (TB.p2CurrentCard[0].score)) {
-      // playWar();
-      //   }
-      //   console.log("Its a tie!");
-      // }
-  // }
+      }
+      else if ((TB.p1CurrentCard[0].score) === (TB.p2CurrentCard[0].score)) {
+      this.playWar();
+      console.log("Its a tie!");
+        }
+        
+      }
+
 
   playWar() {
-    for (let i = P1.hand.length - 8; i < P1.hand.length; i++){
-      TB.p1warCards.push(P1.hand.pop())
-    }
-    for (let i = P2.hand.length - 8; i < P2.hand.length; i++){
-      TB.p2warCards.push(P2.hand.pop())
-    }
-    {
+      for (let i = 0; i < 5; i++) {
+        TB.p1warCards.push(P1.hand.pop())
+      }
+      for (let i = 0; i < 5; i++) {
+        TB.p2warCards.push(P2.hand.pop())
+      }
+      {
       if ((TB.p1warCards[3].score) > (TB.p2warCards[3].score)) {
-        this.P1Score++
-        console.log("PlayerOne wins with their current score of " + this.P1Score);
-        for (let x = 0; x < 4; x++){
-          P1.hand.unshift(TB.p1warCards.shift())
-          P1.hand.unshift(TB.p2warCards.shift())
+        P1.hand.unshift(TB.p1CurrentCard.shift())
+        P1.hand.unshift(TB.p2CurrentCard.shift())
+          this.P1Score++
+          console.log("PlayerOne wins war with their current score of " + this.P1Score);
+          for (let x = 0; x < 5; x++) {
+            P1.hand.unshift(TB.p1warCards.shift())
+            P1.hand.unshift(TB.p2warCards.shift())
+          }
+          this.keepPlayingOrNot();
         }
-      }
-      else if ((TB.p1warCards[3].score) < (TB.p2warCards[3].score)) {
-        this.P1Score++
-        console.log("PlayerTwo wins with their current score of " + this.P2Score);
-        for (let x = 0; x < 4; x++){
-          P2.hand.unshift(TB.p1warCards.shift())
-          P2.hand.unshift(TB.p2warCards.shift())
+        else if ((TB.p1warCards[3].score) < (TB.p2warCards[3].score)) {
+          P2.hand.unshift(TB.p1CurrentCard.shift())
+          P2.hand.unshift(TB.p2CurrentCard.shift())
+          this.P1Score++
+          console.log("PlayerTwo wins war with their current score of " + this.P2Score);
+          
+          for (let x = 0; x < 5; x++) {
+            P2.hand.unshift(TB.p1warCards.shift())
+            P2.hand.unshift(TB.p2warCards.shift())
+          }
+          this.keepPlayingOrNot();
+        }
+        else {
+          this.playWar()
         }
       }
     }
-  }   
+      
   
-  // keepPlayingOrNot() {
-  //   while (P1.hand.length > 0 && P2.hand.length > 0) {
-  //     this.playCard();
-  //     this.checkCards();
-  //   }
-  // }
-  // printScore() {
-  //   let Round = this.P1Score + this.P2Score
-  //   console.log("its finally over after round #" + Round)
-  // }
+  keepPlayingOrNot() {
+    while (P1.hand.length > 0 && P2.hand.length > 0) {
+      this.playCard();
+      this.checkCards();
+    }
+  }
+  printScore() {
+    let Round = this.P1Score + this.P2Score
+    console.log("its finally over after round #" + Round)
+  }
   }
   
 
@@ -197,10 +208,10 @@ MD.deal()
 // console.log(P2.hand)
 
 TB.playCard()
-// TB.checkCards()
-TB.playWar()
-// TB.keepPlayingOrNot()
-// TB.printScore()
+TB.checkCards()
+TB.keepPlayingOrNot()
+TB.printScore()
+
 
 
 // console.log(TB.p1CurrentCard)
@@ -210,12 +221,13 @@ TB.playWar()
 
 // console.log(TB.p1CurrentCard.length)
 // console.log(TB.p2CurrentCard.length)
+
+console.log(P1.hand)
+console.log(P2.hand)
 console.log(P1.hand.length)
 console.log(P2.hand.length)
 console.log(TB.p1CurrentCard.length)
 console.log(TB.p2CurrentCard.length)
-console.log(P1.hand)
-console.log(P2.hand)
 console.log(TB.p1warCards)
 console.log(TB.p2warCards)
 
