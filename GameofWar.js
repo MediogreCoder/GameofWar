@@ -54,14 +54,28 @@ class Table {
   // }
 
   playWar() {
-    TB.p1warCards.splice(0, 0, P1.hand.splice(0, 4));
-    TB.p2warCards.splice(0, 0, P2.hand.splice(0, 4));
+    for (let i = P1.hand.length - 8; i < P1.hand.length; i++){
+      TB.p1warCards.push(P1.hand.pop())
+    }
+    for (let i = P2.hand.length - 8; i < P2.hand.length; i++){
+      TB.p2warCards.push(P2.hand.pop())
+    }
     {
-      if ((TB.p1warCards[0][3].score) > (TB.p2warCards[0][3].score)) {
+      if ((TB.p1warCards[3].score) > (TB.p2warCards[3].score)) {
         this.P1Score++
         console.log("PlayerOne wins with their current score of " + this.P1Score);
-        P1.hand.splice(0, 0, TB.p1warCards.splice(0, 4));
-        P1.hand.splice(0, 0, TB.p2warCards.splice(0, 4));
+        for (let x = 0; x < 4; x++){
+          P1.hand.unshift(TB.p1warCards.shift())
+          P1.hand.unshift(TB.p2warCards.shift())
+        }
+      }
+      else if ((TB.p1warCards[3].score) < (TB.p2warCards[3].score)) {
+        this.P1Score++
+        console.log("PlayerTwo wins with their current score of " + this.P2Score);
+        for (let x = 0; x < 4; x++){
+          P2.hand.unshift(TB.p1warCards.shift())
+          P2.hand.unshift(TB.p2warCards.shift())
+        }
       }
     }
   }   
@@ -194,16 +208,17 @@ TB.playWar()
 // console.log(TB.p1CurrentCard.length)
 // console.log(TB.p2CurrentCard.length)
 
-console.log(TB.p1CurrentCard.length)
-console.log(TB.p2CurrentCard.length)
-console.log(P1.hand.length)
-console.log(P2.hand.length)
 // console.log(TB.p1CurrentCard.length)
 // console.log(TB.p2CurrentCard.length)
+console.log(P1.hand.length)
+console.log(P2.hand.length)
+console.log(TB.p1CurrentCard.length)
+console.log(TB.p2CurrentCard.length)
 console.log(P1.hand)
 console.log(P2.hand)
 console.log(TB.p1warCards)
 console.log(TB.p2warCards)
+
 
 
 
